@@ -1,0 +1,86 @@
+[
+  {
+    "id":1,
+    "nombre": "Greek Salad",
+    "descripcion": "La famosa ensalada griega de lechuga crujiente, pimientos, aceitunas y nuestro queso feta de inspiración opita, aderezado con ajo crujiente y picatostes de romero.",
+    "precio": "$18.000",
+    "imagen": "/images/greek-salad.jpg"
+  },
+  {
+    "id":2,
+    "nombre": "Brochetta",
+    "descripcion": "Nuestra brochetta está hecha con pan a la parrilla que ha sido untado con ajo y sazonado con sal y aceite de oliva.",
+    "precio": "$18.000",
+    "imagen": "/images/bruchetta.svg"
+  },
+  {
+    "id":3,
+    "nombre": "Lemon dessert",
+    "descripcion": "Esto proviene directamente del libro de recetas de la abuela; cada ingrediente ha sido seleccionado cuidadosamente y es tan auténtico como se pueda imaginar.",
+    "precio": "$18.000",
+    "imagen": "/images/lemon-dessert.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Pizza Margarita",
+    "descripcion": "Clásica pizza italiana con una base de tomate, mozzarella fresca y hojas de albahaca.",
+    "precio": "$25.000",
+    "imagen": "/images/pizza-margarita.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Hamburguesa Clásica",
+    "descripcion": "Jugosa carne de res con queso cheddar, lechuga, tomate y nuestra salsa especial en pan artesanal.",
+    "precio": "$22.000",
+    "imagen": "/images/hamburguesa-clasica.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Pasta Alfredo",
+    "descripcion": "Fettuccine cremoso con salsa Alfredo, acompañado de pollo a la parrilla y queso parmesano.",
+    "precio": "$28.000",
+    "imagen": "/images/pasta-alfredo.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Sopa de Tomate",
+    "descripcion": "Sopa casera de tomate con un toque de albahaca y acompañada de crujientes tostadas con queso.",
+    "precio": "$16.000",
+    "imagen": "/images/sopa-tomate.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Filete de Salmón",
+    "descripcion": "Filete de salmón a la parrilla con salsa de mantequilla y limón, acompañado de vegetales asados.",
+    "precio": "$35.000",
+    "imagen": "/images/filete-salmon.jpg"
+  },
+  {
+    "id": 9,
+    "nombre": "Tacos de Pollo",
+    "descripcion": "Tortillas de maíz rellenas de pollo sazonado, cebolla, cilantro y salsa de aguacate.",
+    "precio": "$20.000",
+    "imagen": "/images/tacos-pollo.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Ensalada César",
+    "descripcion": "Clásica ensalada con lechuga romana, pollo a la parrilla, queso parmesano y aderezo César.",
+    "precio": "$18.000",
+    "imagen": "/images/ensalada-cesar.jpg"
+  },
+  {
+    "id": 11,
+    "nombre": "Brownie con Helado",
+    "descripcion": "Brownie de chocolate caliente acompañado de una bola de helado de vainilla y salsa de caramelo.",
+    "precio": "$15.000",
+    "imagen": "/images/brownie-helado.jpg"
+  },
+  {
+    "id": 12,
+    "nombre": "Jugo Natural",
+    "descripcion": "Jugo de frutas frescas de temporada, sin azúcar añadida y con hielo al gusto.",
+    "precio": "$10.000",
+    "imagen": "/images/jugo-natural.jpg"
+  }
+]

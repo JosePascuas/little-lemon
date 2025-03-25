@@ -1,6 +1,11 @@
+import Presentation from "./Presentation";
+import Destacados from "./Destacados";
 const Main= ()=> {
   return(
-    <h2>este es el main parientito</h2>
+    <header>
+      <Presentation/>
+      <Destacados/>
+    </header>
   )
 }
 
