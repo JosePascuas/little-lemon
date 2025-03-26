@@ -15,6 +15,7 @@ const Menu = () => {
   return(
     <section>
       <h1>Menú del Restaurante</h1>
+      {menu.length > 0 ? (
       <ul>
         {menu.map((item) =>(
           <li key={item.id}>
@@ -28,6 +29,11 @@ const Menu = () => {
           </li>
         ))}
       </ul>
+      ) : (
+        <p>No hay platos en el menú por el momento</p>
+      )}
     </section>
   )
 }
+
+export default Menu;

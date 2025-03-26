@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Stefani Lincon",
+    "imagen": "/images/clientes/stefani-lincon.jpg",
+    "nota": "Excelente comida y atención impecable. ¡Volveré sin duda!"
+  },
+  {
+    "id": 2,
+    "nombre": "Karla Volkosvki",
+    "imagen": "/images/clientes/karla-volkosvki.jpg",
+    "nota": "Un lugar increíble con platos deliciosos y un gran servicio."
+  },
+  {
+    "id": 3,
+    "nombre": "Laura Ramirez",
+    "imagen": "/images/clientes/laura-ramirez.jpg",
+    "nota": "Comida fresca, ambiente acogedor y atención de primera."
+  },
+  {
+    "id": 4,
+    "nombre": "Daniell Guzmán",
+    "imagen": "/images/clientes/daniel-guzman.jpg",
+    "nota": "Perfecto para cualquier ocasión.¡Altamente recomendado!."
+  },
+  {
+    "id": 5,
+    "nombre": "Carlos Fernández",
+    "imagen": "/images/clientes/carlos-fernandez.jpg",
+    "nota": "La comida estuvo deliciosa y la atención fue excelente."
+  },
+  {
+    "id": 6,
+    "nombre": "Sofía Herrera",
+    "imagen": "/images/clientes/sofia-herrera.jpg",
+    "nota": "Me encantó la variedad del menú. Definitivamente regresaré."
+  }
+]
