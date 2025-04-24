@@ -1,6 +1,6 @@
 import inicio from '../assets/images/restauranfood.jpg'
 
-const Presentation = () =>{
+const Presentacion = () =>{
   return (
     <section>
       <h1>Litte Lemon</h1>
@@ -18,4 +18,4 @@ const Presentation = () =>{
   )
 };
 
-export default Presentation;
+export default Presentacion;

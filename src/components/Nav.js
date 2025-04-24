@@ -2,10 +2,10 @@ import logo from '../assets/images/logo.svg'
 
 const Nav = () => {
   return(
-    <section>
+    <section className="flex w-screen justify-center">
       <img src={logo} alt='Logotipo'/>
-      <ul>
-        <li href="#inicio">
+      <ul className="flex w-[700px] p-5 m-5 justify-end gap-[15px] font-karla font-extrabold">
+        <li className="" href="#inicio">
           <a>Inicio</a>
         </li>
         <li href="#nosotros">
