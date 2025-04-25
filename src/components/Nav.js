@@ -2,29 +2,17 @@ import logo from '../assets/images/logo.svg'
 
 const Nav = () => {
   return(
-    <section className="flex w-screen justify-center">
-      <img src={logo} alt='Logotipo'/>
-      <ul className="flex w-[700px] p-5 m-5 justify-end gap-[15px] font-karla font-extrabold">
-        <li className="" href="#inicio">
-          <a>Inicio</a>
-        </li>
-        <li href="#nosotros">
-          <a>Nosotros</a>
-        </li>
-        <li href="#menu">
-          <a>Menú</a>
-        </li>
-        <li href="reservas">
-          <a>Reservas</a>
-        </li>
-        <li href="ordernar">
-          <a>Ordenar</a>
-        </li>
-        <li href="#iniciar-sesion">
-          <a>Iniciar sesion</a>
-        </li>
-      </ul>
-    </section>
+  <section className="flex flex-col md:flex-row items-center justify-center w-full md:mb-5 md:mt-5">
+    <img className='w-[190px] h-[56px]' src={logo} alt='Logotipo'/>
+
+    <ul className="flex w-full md:w-[650px] justify-center mt-5 md:mt-0 md:ml-10 mb-5 md:mb-0 md:justify-end gap-[10px] md:gap-[20px] font-karla text-base font-extrabold">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#reservas">Reservas</a></li>
+      <li><a href="#ordenar">Ordenar</a></li>
+    </ul>
+</section>
   )
 }
 export default Nav;
