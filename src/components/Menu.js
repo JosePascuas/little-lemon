@@ -21,6 +21,7 @@ const Menu = () => {
           <li key={item.id}>
             <img src={item.imagen} alt={item.nombre}/>
             <h3>{item.nombre}</h3>
+            <p>{item.precio}</p>
             <p>{item.descripcion}</p>
             <div>
               <a href="">Hacer pedido</a>
