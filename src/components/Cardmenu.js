@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react"
 import delivery from "../assets/icons/delivery-movement-svgrepo-com.svg"
 
-const Cardmenu = () => {
-    const [menu, setMenu] = useState([])
-
-  const seleccionados=[1,2,3]
+const Cardmenu = ({seleccionados=[]}) => {
+  const [menu, setMenu] = useState([])
 
   useEffect(()=>{
     fetch("/menu.json")
@@ -13,10 +11,13 @@ const Cardmenu = () => {
       .catch((error)=> console.log("error al cargar al menú:",error))
   },[]);
 
-  const platosDestacados = menu.filter((item)=>seleccionados.includes(item.id))
+  const platosDestacados = seleccionados.length > 0
+  ? menu.filter((item)=>seleccionados.includes(item.id))
+  : menu;
+
   return(
     <section className="flex flex-col w-full items-center justify-center mt-10">
-      <ul className="flex flex-col w-full items-center md:flex-row mt-10 md:mt-10 md:max-w-[880px] md:justify-between md:items-stretch gap-5 " >
+      <ul className="flex flex-col md:flex-wrap w-full items-center justify-center md:flex-row mt-10 md:mt-10 md:max-w-[880px] lg:justify-between md:items-stretch gap-5 " >
         {platosDestacados.map((item) =>(
           <li className="flex flex-col w-[269px] min-h-[470px] bg-tarjetas-fondo rounded-t-2xl" key={item.id}>
             <img className="w-[270px] h-[178px] rounded-t-2xl" src={item.imagen} alt={item.nombre}/>

@@ -1,4 +1,5 @@
 import inicio from '../assets/images/restauranfood.jpg'
+import { Link } from 'react-router-dom';
 
 const Presentacion = () =>{
   return (
@@ -10,9 +11,11 @@ const Presentacion = () =>{
           <p className='text-letras-claras text-base w-[280px] font-karla font-extrabold mt-5'>
           Somos un restaurante mediterráneo familiar, centrado en recetas tradicionales servidas con un toque moderno.
           </p>
-          <button className='text-letras-botones bg-letras-amarillas rounded-md w-[182px] h-[35px] font-karla text-base font-extrabold mt-10'>
-            Reservar Mesa
-          </button>
+          <Link to="/Reservaspage">
+            <button className='text-letras-botones bg-letras-amarillas rounded-md w-[182px] h-[35px] font-karla text-base font-extrabold mt-10'>
+              Reservar Mesa
+            </button>
+          </Link>
         </section>
         <div className='flex justify-center md:justify-end w-full mt-0'>
           <img className='w-[300px] h-[380px] md:w-[345px] md:h-[434px] object-cover rounded-lg shadow-lg md:translate-y-10'

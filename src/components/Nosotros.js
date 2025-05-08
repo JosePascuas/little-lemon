@@ -3,7 +3,7 @@ import chefs from "../assets/images/MarioandAdrian.jpg"
 
 const Nosotros = () => {
   return(
-    <section className="flex justify-center  bg-primario-verde w-full lg:mb-[180px]">
+    <section id="nosotros" className="flex justify-center  bg-primario-verde w-full lg:mb-[180px]">
       <div className=" flex flex-col md:justify-between md:flex-row w-[880px] gap-10 ml-5 mr-5">
           <div className=" flex flex-col justify-center items-center md:items-start w-auto md:w-[382px] md:mb-10 mb:5">
             <h1 className="text-letras-amarillas font-markazi font-medium text-6xl mt-5">
