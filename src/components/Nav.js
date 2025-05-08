@@ -9,8 +9,8 @@ const Nav = () => {
     <ul className="flex w-full md:w-[650px] justify-center mt-5 md:mt-0 md:ml-10 mb-5 md:mb-0 md:justify-end gap-[10px] md:gap-[20px] font-karla text-base font-extrabold">
       <Link to="/"><li><a href="#inicio">Inicio</a></li></Link>
       <li><a href="#nosotros">Nosotros</a></li>
-      <Link to="/cartamenu"><li><a href="#menu">Menú</a></li></Link>
-      <Link to="/reservaspage"><li><a href="#reservas">Reservas</a></li></Link>
+      <Link to="/cartamenu"><li><a>Menú</a></li></Link>
+      <Link to="/reservaspage"><li><a>Reservas</a></li></Link>
       <li><a href="#ordenar">Ordenar</a></li>
     </ul>
 </section>
