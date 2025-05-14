@@ -17,7 +17,7 @@ const Footer= ()=> {
           <div>
             <h1 className={h1}>Navegar</h1>
             <ul className={ul}>
-              <Link to="/"><li><a>Inicio</a></li></Link>
+              <Link to="/"><li><a href="#inicio">Inicio</a></li></Link>
               <li><a href="#nosotros">Nosotros</a></li>
               <Link to="/cartamenu"><li><a >Menú</a></li></Link>
               <Link to="/reservaspage"><li><a href="#">Reservas</a></li></Link>

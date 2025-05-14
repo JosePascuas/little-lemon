@@ -12,7 +12,8 @@ module.exports = {
         "rojo":"#E61C1C",
         "tarjetas-fondo":"#D9D9D9",
         "letras-oscuras":"#000000",
-        "letras-botones":"#333333"
+        "letras-botones":"#333333",
+        "fondo-formulario":"#4B5E57",
 
       },
       fontFamily: {
