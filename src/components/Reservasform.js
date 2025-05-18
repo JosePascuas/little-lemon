@@ -29,6 +29,7 @@ const handleSubmit = (e) => {
   e.preventDefault();
 
   const newErrors ={};
+
   //Validacion para campo nombre
   if (!formData.nombre.trim()) {
     newErrors.nombre = "El nombre es obligatorio";
@@ -81,8 +82,6 @@ const handleSubmit = (e) => {
     newErrors.ocasion = "Selecciona el tipo de evento que quieres reservar"
   }
 
-
-
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
     return;
@@ -111,7 +110,7 @@ return(
         Nombre de la persona
       </label>
       <input
-        className={`${inputstyle} ${errors.nombre ? 'border-2 border-red-500' : ''}`}
+        className={`${inputstyle} ${errors.nombre ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         name="nombre"
         id="nombre"
         type="text"
@@ -124,7 +123,7 @@ return(
       </label>
       <input
         name="numero"
-        className={`${inputstyle} ${errors.numero ? 'border-2 border-red-500' : ''}`}
+        className={`${inputstyle} ${errors.numero ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         id="numero"
         value={formData.numero}
         type="tel"
@@ -136,7 +135,7 @@ return(
       </label>
       <input
         name="fecha"
-        className={`${inputstyle} ${errors.fecha ? 'border-2 border-red-500' : ''}`}
+        className={`${inputstyle} ${errors.fecha ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         type="date"
         id="fecha"
         value={formData.fecha}
@@ -148,7 +147,7 @@ return(
       </label>
       <select
         name="hora"
-        className={`${selectstyle} ${errors.hora ? 'border-2 border-red-500' : ''}`}
+        className={`${selectstyle} ${errors.hora ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         id="hora"
         value={formData.hora}
         onChange={handleChange}
@@ -167,7 +166,7 @@ return(
       </label>
       <input
         name="personas"
-        className={`${inputstyle} ${errors.personas ? 'border-2 border-red-500' : ''}`}
+        className={`${inputstyle} ${errors.personas ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         type="number"
         id="personas"
         value={formData.personas}
@@ -179,7 +178,7 @@ return(
       </label>
       <select
         name="ocasion"
-        className={`${selectstyle} ${errors.ocasion ? 'border-2 border-red-500' : ''}`}
+        className={`${selectstyle} ${errors.ocasion ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
         id="ocasion"
         value={formData.ocasion}
         onChange={handleChange}

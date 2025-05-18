@@ -15,7 +15,7 @@ const Menu = () => {
   return(
     <section className=" flex justify-center items-center flex-col w-full">
       <div className="flex flex-wrap justify-center items-center max-w-[880px] mb-10">
-        <h1 className="font-markazi text-6xl mt-20">Menú del Restaurante</h1>
+        <h1 className="font-markazi text-6xl text-center mt-20">Menú del Restaurante</h1>
         {menu.length > 0 ? (
         <Cardmenu/>
         ) : (
