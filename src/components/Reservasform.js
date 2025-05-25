@@ -1,7 +1,18 @@
-import React from "react";
+import { ToastContainer ,toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const Reservasform = () => {
+const getMinDate = () => {
+  const now = new Date();
+  const today = new Date();
+
+  if (now.getHours() >= 13) {
+    today.setDate(today.getDate() + 1);
+  }
+
+  return today.toISOString().split('T')[0];
+};
 
 const inputstyle = "p-3 text-center text-[22px] h-[38px] w-[260px] bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
 const selectstyle = "p-3 text-center text-[22px] h-[50px] w-[200px] mb-3 bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
@@ -10,13 +21,14 @@ const errores = "text-red-600 text-[18px]"
 const [formData, setFormData] = useState({
   nombre: "",
   numero: "",
-  fecha: "",
+  fecha: getMinDate(),
   hora: "",
   personas: 1,
   ocasion: "",
 });
 
 const [errors, setErrors] = useState({});
+const [succesMessage, setSuccesMessage] = useState ("");
 
 const handleChange = (e) => {
   const {id, value} = e.target;
@@ -50,18 +62,27 @@ const handleSubmit = (e) => {
     }
 
   //validacion para fecha
-  if (!formData.fecha) {
-  newErrors.fecha = "La fecha es obligatoria";
-  } else {
-    const today = new Date();
-    const selectedDate = new Date(formData.fecha);
 
-    // Eliminar la hora para comparar solo la fecha
+  if (!formData.fecha) {
+    newErrors.fecha = "La fecha es obligatoria";
+  } else {
+    const now = new Date();
+    const selectedDate = new Date(formData.fecha);
+    const today = new Date();
     today.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
 
+    // 1:00 p.m. de hoy
+    const cutoff = new Date();
+    cutoff.setHours(13, 0, 0, 0);
+
     if (selectedDate < today) {
       newErrors.fecha = "La fecha no puede ser anterior a hoy";
+    } else if (
+      selectedDate.getTime() === today.getTime() &&
+      now >= cutoff
+    ) {
+      newErrors.fecha = "Después de la 1:00 p.m., solo puedes reservar para mañana";
     }
   }
 
@@ -73,7 +94,7 @@ const handleSubmit = (e) => {
   //validacion numero de personas
   if(!formData.personas) {
     newErrors.personas = "Seleccione la cantidad de asistentes"
-  } else if (formData.personas === 0 || formData.personas > 10) {
+  } else if (Number(formData.personas) === 0 || Number(formData.personas) > 10) {
     newErrors.personas = "Seleccione un numero entre 1 y 10 personas si son más de 10 personas comunicarse con el restaurante"
   }
 
@@ -84,20 +105,27 @@ const handleSubmit = (e) => {
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
-    return;
-  }
-  setErrors({})
-
-  console.log( "Datos del formulario:", formData )
-
-  setFormData({
-    nombre: "",
-    numero: "",
-    fecha: "",
-    hora: "",
-    personas: "",
-    ocasion: "",
+  } else {console.log( "Datos del formulario:", formData )
+    setErrors({})
+    toast.success("¡Reserva enviada exitosamente!", {
+    className: "bg-gray-100 w-[400px] text-xl font-markazi text-center rounded-lg shadow-xl",
+    bodyClassName: "text-xl font-markazi",
+    progressClassName: "bg-gray-600",
+    autoClose: 5000,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
   });
+
+    setFormData({
+      nombre: "",
+      numero: "",
+      fecha: "",
+      hora: "",
+      personas: "",
+      ocasion: "",
+    });
+  }
 };
 
 
@@ -139,6 +167,7 @@ return(
         type="date"
         id="fecha"
         value={formData.fecha}
+        min={getMinDate()}
         onChange={handleChange}
       />
       {errors.fecha && <p className={errores}>{errors.fecha}</p>}
@@ -194,6 +223,13 @@ return(
         Reservar Mesa
       </button>
     </form>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      closeOnClick
+      pauseOnHover
+      draggable
+    />
   </section>
 )}
 
