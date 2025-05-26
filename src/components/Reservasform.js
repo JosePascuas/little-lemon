@@ -113,7 +113,7 @@ const Reservasform = () => {
     }
 
     try {
-      const response = await fetch("http://little-lemon-backend-production.up.railway.app/reservas", {
+      const response = await fetch("https://little-lemon-backend-production.up.railway.app/reservas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
