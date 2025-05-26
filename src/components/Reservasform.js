@@ -211,12 +211,12 @@ const Reservasform = () => {
           onChange={handleChange}
         >
           <option value="">Selecciona una hora</option>
-          <option value="5:00pm">5:00pm</option>
-          <option value="6:00pm">6:00pm</option>
-          <option value="7:00pm">7:00pm</option>
-          <option value="8:00pm">8:00pm</option>
-          <option value="9:00pm">9:00pm</option>
-          <option value="10:00pm">10:00pm</option>
+          <option value="17:00:00">5:00pm</option>
+          <option value="18:00:00">6:00pm</option>
+          <option value="19:00:00">7:00pm</option>
+          <option value="20:00:00">8:00pm</option>
+          <option value="21:00:00">9:00pm</option>
+          <option value="22:00:00">10:00pm</option>
         </select>
         {errors.hora && <p className={errores}>{errors.hora}</p>}
 
