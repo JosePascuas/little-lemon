@@ -1,56 +1,59 @@
-import { ToastContainer ,toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const Reservasform = () => {
-const getMinDate = () => {
-  const now = new Date();
-  const today = new Date();
+  const getMinDate = () => {
+    const now = new Date();
+    const today = new Date();
 
-  if (now.getHours() >= 13) {
-    today.setDate(today.getDate() + 1);
-  }
+    if (now.getHours() >= 13) {
+      today.setDate(today.getDate() + 1);
+    }
 
-  return today.toISOString().split('T')[0];
-};
+    return today.toISOString().split("T")[0];
+  };
 
-const inputstyle = "p-3 text-center text-[22px] h-[38px] w-[260px] bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
-const selectstyle = "p-3 text-center text-[22px] h-[50px] w-[200px] mb-3 bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
-const errores = "text-red-600 text-[18px]"
+  const inputstyle =
+    "p-3 text-center text-[22px] h-[38px] w-[260px] bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
+  const selectstyle =
+    "p-3 text-center text-[22px] h-[50px] w-[200px] mb-3 bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
+  const errores = "text-red-600 text-[18px]";
 
-const [formData, setFormData] = useState({
-  nombre: "",
-  numero: "",
-  fecha: getMinDate(),
-  hora: "",
-  personas: 1,
-  ocasion: "",
-});
-
-const [errors, setErrors] = useState({});
-const [succesMessage, setSuccesMessage] = useState ("");
-
-const handleChange = (e) => {
-  const {id, value} = e.target;
-  setFormData({
-    ...formData, [id]:value
+  const [formData, setFormData] = useState({
+    nombre: "",
+    numero: "",
+    fecha: getMinDate(),
+    hora: "",
+    personas: 1,
+    ocasion: "",
   });
-};
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+  const [errors, setErrors] = useState({});
+  const [succesMessage, setSuccesMessage] = useState("");
 
-  const newErrors ={};
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  };
 
-  //Validacion para campo nombre
-  if (!formData.nombre.trim()) {
-    newErrors.nombre = "El nombre es obligatorio";
-  } else if (formData.nombre.trim().length < 3) {
-    newErrors.nombre = "EL nombre debe tener minimo 3 caracteres";
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //validacion para campo numero de telefono
-  if (!formData.numero.trim()) {
+    const newErrors = {};
+
+    // Validación para campo nombre
+    if (!formData.nombre.trim()) {
+      newErrors.nombre = "El nombre es obligatorio";
+    } else if (formData.nombre.trim().length < 3) {
+      newErrors.nombre = "El nombre debe tener mínimo 3 caracteres";
+    }
+
+    // Validación para campo número de teléfono
+    if (!formData.numero.trim()) {
       newErrors.numero = "El número de contacto es obligatorio";
     } else {
       const phoneRegex = /^[\d\s\-+]+$/;
@@ -61,176 +64,212 @@ const handleSubmit = (e) => {
       }
     }
 
-  //validacion para fecha
+    // Validación para fecha
+    if (!formData.fecha) {
+      newErrors.fecha = "La fecha es obligatoria";
+    } else {
+      const now = new Date();
+      const selectedDate = new Date(formData.fecha);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      selectedDate.setHours(0, 0, 0, 0);
 
-  if (!formData.fecha) {
-    newErrors.fecha = "La fecha es obligatoria";
-  } else {
-    const now = new Date();
-    const selectedDate = new Date(formData.fecha);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    selectedDate.setHours(0, 0, 0, 0);
+      // 1:00 p.m. de hoy
+      const cutoff = new Date();
+      cutoff.setHours(13, 0, 0, 0);
 
-    // 1:00 p.m. de hoy
-    const cutoff = new Date();
-    cutoff.setHours(13, 0, 0, 0);
-
-    if (selectedDate < today) {
-      newErrors.fecha = "La fecha no puede ser anterior a hoy";
-    } else if (
-      selectedDate.getTime() === today.getTime() &&
-      now >= cutoff
-    ) {
-      newErrors.fecha = "Después de la 1:00 p.m., solo puedes reservar para mañana";
+      if (selectedDate < today) {
+        newErrors.fecha = "La fecha no puede ser anterior a hoy";
+      } else if (selectedDate.getTime() === today.getTime() && now >= cutoff) {
+        newErrors.fecha =
+          "Después de la 1:00 p.m., solo puedes reservar para mañana";
+      }
     }
-  }
 
-  //validacion hora sencilla
-  if (!formData.hora) {
-  newErrors.hora = "La hora de la reserva es obligatoria";
-  }
+    // Validación hora sencilla
+    if (!formData.hora) {
+      newErrors.hora = "La hora de la reserva es obligatoria";
+    }
 
-  //validacion numero de personas
-  if(!formData.personas) {
-    newErrors.personas = "Seleccione la cantidad de asistentes"
-  } else if (Number(formData.personas) === 0 || Number(formData.personas) > 10) {
-    newErrors.personas = "Seleccione un numero entre 1 y 10 personas si son más de 10 personas comunicarse con el restaurante"
-  }
+    // Validación número de personas
+    if (!formData.personas) {
+      newErrors.personas = "Seleccione la cantidad de asistentes";
+    } else if (
+      Number(formData.personas) === 0 ||
+      Number(formData.personas) > 10
+    ) {
+      newErrors.personas =
+        "Seleccione un número entre 1 y 10 personas; si son más de 10, comunicarse con el restaurante";
+    }
 
-  //validacion tipo de evento
-  if(!formData.ocasion) {
-    newErrors.ocasion = "Selecciona el tipo de evento que quieres reservar"
-  }
+    // Validación tipo de evento
+    if (!formData.ocasion) {
+      newErrors.ocasion = "Selecciona el tipo de evento que quieres reservar";
+    }
 
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-  } else {console.log( "Datos del formulario:", formData )
-    setErrors({})
-    toast.success("¡Reserva enviada exitosamente!", {
-    className: "bg-gray-100 w-[400px] text-xl font-markazi text-center rounded-lg shadow-xl",
-    bodyClassName: "text-xl font-markazi",
-    progressClassName: "bg-gray-600",
-    autoClose: 5000,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-    setFormData({
-      nombre: "",
-      numero: "",
-      fecha: "",
-      hora: "",
-      personas: "",
-      ocasion: "",
-    });
-  }
-};
+    try {
+      const response = await fetch("http://little-lemon-backend-production.up.railway.app:8080/reservas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
+      if (!response.ok) {
+        throw new Error("Error al enviar la reserva");
+      }
 
-return(
-  <section className="flex justify-center items-center w-full mt-20 mb-20">
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col justify-center items-center w-[880px] gap-5 font-markazi text-2xl">
-      <label htmlFor="nombre">
-        Nombre de la persona
-      </label>
-      <input
-        className={`${inputstyle} ${errors.nombre ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        name="nombre"
-        id="nombre"
-        type="text"
-        value={formData.nombre}
-        onChange={handleChange}
-      />
-      {errors.nombre && <p className={errores}>{errors.nombre}</p>}
-      <label htmlFor="numero">
-        Numero de contacto
-      </label>
-      <input
-        name="numero"
-        className={`${inputstyle} ${errors.numero ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        id="numero"
-        value={formData.numero}
-        type="tel"
-        onChange={handleChange}
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+
+      toast.success("¡Reserva enviada exitosamente!", {
+        className:
+          "bg-gray-100 w-[400px] text-xl font-markazi text-center rounded-lg shadow-xl",
+        bodyClassName: "text-xl font-markazi",
+        progressClassName: "bg-gray-600",
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      setFormData({
+        nombre: "",
+        numero: "",
+        fecha: getMinDate(),
+        hora: "",
+        personas: 1,
+        ocasion: "",
+      });
+      setErrors({});
+    } catch (error) {
+      console.error(error);
+      toast.error("Hubo un error al enviar la reserva. Intenta de nuevo.");
+    }
+  };
+
+  return (
+    <section className="flex justify-center items-center w-full mt-20 mb-20">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col justify-center items-center w-[880px] gap-5 font-markazi text-2xl"
+      >
+        <label htmlFor="nombre">Nombre de la persona</label>
+        <input
+          className={`${inputstyle} ${
+            errors.nombre ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          name="nombre"
+          id="nombre"
+          type="text"
+          value={formData.nombre}
+          onChange={handleChange}
         />
-      {errors.numero && <p className={errores}>{errors.numero}</p>}
-      <label htmlFor="fecha">
-        Elegir fecha
-      </label>
-      <input
-        name="fecha"
-        className={`${inputstyle} ${errors.fecha ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        type="date"
-        id="fecha"
-        value={formData.fecha}
-        min={getMinDate()}
-        onChange={handleChange}
+        {errors.nombre && <p className={errores}>{errors.nombre}</p>}
+
+        <label htmlFor="numero">Numero de contacto</label>
+        <input
+          name="numero"
+          className={`${inputstyle} ${
+            errors.numero ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          id="numero"
+          value={formData.numero}
+          type="tel"
+          onChange={handleChange}
+        />
+        {errors.numero && <p className={errores}>{errors.numero}</p>}
+
+        <label htmlFor="fecha">Elegir fecha</label>
+        <input
+          name="fecha"
+          className={`${inputstyle} ${
+            errors.fecha ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          type="date"
+          id="fecha"
+          value={formData.fecha}
+          min={getMinDate()}
+          onChange={handleChange}
+        />
+        {errors.fecha && <p className={errores}>{errors.fecha}</p>}
+
+        <label htmlFor="hora">Hora de la reserva</label>
+        <select
+          name="hora"
+          className={`${selectstyle} ${
+            errors.hora ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          id="hora"
+          value={formData.hora}
+          onChange={handleChange}
+        >
+          <option value="">Selecciona una hora</option>
+          <option value="5:00pm">5:00pm</option>
+          <option value="6:00pm">6:00pm</option>
+          <option value="7:00pm">7:00pm</option>
+          <option value="8:00pm">8:00pm</option>
+          <option value="9:00pm">9:00pm</option>
+          <option value="10:00pm">10:00pm</option>
+        </select>
+        {errors.hora && <p className={errores}>{errors.hora}</p>}
+
+        <label htmlFor="personas">Numero de personas</label>
+        <input
+          name="personas"
+          className={`${inputstyle} ${
+            errors.personas ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          type="number"
+          id="personas"
+          value={formData.personas}
+          onChange={handleChange}
+        />
+        {errors.personas && <p className={errores}>{errors.personas}</p>}
+
+        <label htmlFor="ocasion">Tipo de evento</label>
+        <select
+          name="ocasion"
+          className={`${selectstyle} ${
+            errors.ocasion ? "border-2 border-red-500" : ""
+          } transition-all duration-300 ease-in-out`}
+          id="ocasion"
+          value={formData.ocasion}
+          onChange={handleChange}
+        >
+          <option value="">Selecciona un evento</option>
+          <option value="Cumpleaños">Cumpleaños</option>
+          <option value="Aniversario">Aniversario</option>
+          <option value="Compromisos">Compromisos</option>
+          <option value="Grados">Grados</option>
+        </select>
+        {errors.ocasion && <p className={errores}>{errors.ocasion}</p>}
+
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700 transition duration-300 ease-in-out"
+        >
+          Reservar
+        </button>
+      </form>
+      <ToastContainer
+        position="top-center"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
-      {errors.fecha && <p className={errores}>{errors.fecha}</p>}
-      <label htmlFor="hora">
-        Hora de la reserva
-      </label>
-      <select
-        name="hora"
-        className={`${selectstyle} ${errors.hora ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        id="hora"
-        value={formData.hora}
-        onChange={handleChange}
-      >
-        <option value="">Selecciona una hora</option>
-        <option value="5:00pm">5:00pm</option>
-        <option value="6:00pm">6:00pm</option>
-        <option value="7:00pm">7:00pm</option>
-        <option value="8:00pm">8:00pm</option>
-        <option value="9:00pm">9:00pm</option>
-        <option value="10:00pm">10:00pm</option>
-      </select>
-      {errors.hora && <p className={errores}>{errors.hora}</p>}
-      <label htmlFor="personas">
-        Numero de personas
-      </label>
-      <input
-        name="personas"
-        className={`${inputstyle} ${errors.personas ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        type="number"
-        id="personas"
-        value={formData.personas}
-        onChange={handleChange}
-      />
-      {errors.personas && <p className={errores}>{errors.personas}</p>}
-      <label htmlFor="ocasion">
-        Tipo de evento
-      </label>
-      <select
-        name="ocasion"
-        className={`${selectstyle} ${errors.ocasion ? 'border-2 border-red-500' : ''} transition-all duration-300 ease-in-out`}
-        id="ocasion"
-        value={formData.ocasion}
-        onChange={handleChange}
-      >
-        <option value="">Selecciona un evento</option>
-        <option value="Cumpleaños">Cumpleaños</option>
-        <option value="Aniversario">Aniversario</option>
-        <option value="Compromisos">Compromisos</option>
-        <option value="Grados">Grados</option>
-      </select>
-      {errors.ocasion && <p className={errores}>{errors.ocasion}</p>}
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mt-5 mb-5">
-        Reservar Mesa
-      </button>
-    </form>
-    <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      closeOnClick
-      pauseOnHover
-      draggable
-    />
-  </section>
-)}
+    </section>
+  );
+};
 
 export default Reservasform;
