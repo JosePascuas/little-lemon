@@ -11,7 +11,11 @@ const Reservasform = () => {
       today.setDate(today.getDate() + 1);
     }
 
-    return today.toISOString().split("T")[0];
+    const year = minDate.getFullYear();
+    const month = String(minDate.getMonth() + 1).padStart(2, "0");
+    const day = String(minDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
   };
 
   const inputstyle =
