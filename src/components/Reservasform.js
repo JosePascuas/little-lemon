@@ -5,10 +5,10 @@ import { useState } from "react";
 const Reservasform = () => {
   const getMinDate = () => {
     const now = new Date();
-    const today = new Date();
+    const minDate = new Date();
 
     if (now.getHours() >= 13) {
-      today.setDate(today.getDate() + 1);
+      minDate.setDate(minDate.getDate() + 1);
     }
 
     const year = minDate.getFullYear();
