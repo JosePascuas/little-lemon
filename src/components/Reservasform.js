@@ -24,7 +24,7 @@ const Reservasform = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     numero: "",
-    fecha: getMinDate(),
+    fecha: "",
     hora: "",
     personas: 1,
     ocasion: "",
@@ -111,9 +111,12 @@ const Reservasform = () => {
       return;
     }
 
-    if (formData.fecha.includes("T")) {
-    formData.fecha = formData.fecha.split("T")[0];
-}
+    const cleanData = {
+      ...formData,
+      fecha: formData.fecha.includes("T")
+      ? formData.fecha.split("T")[0]
+      : formData.fecha,
+    };
 
     try {
       const response = await fetch("https://little-lemon-backend-production.up.railway.app/reservas", {
@@ -121,7 +124,7 @@ const Reservasform = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(cleanData),
       });
 
       if (!response.ok) {
