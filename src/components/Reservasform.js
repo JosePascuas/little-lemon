@@ -74,19 +74,16 @@ const Reservasform = () => {
     } else {
       const now = new Date();
       const selectedDate = new Date(formData.fecha);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
       selectedDate.setHours(0, 0, 0, 0);
 
-      // 1:00 p.m. de hoy
-      const cutoff = new Date();
-      cutoff.setHours(13, 0, 0, 0);
+      const minDate = new Date();
+      if (now.getHours() >= 13) {
+        minDate.setDate(minDate.getDate() + 1);
+      }
+      minDate.setHours(0, 0, 0, 0);
 
-      if (selectedDate < today) {
-        newErrors.fecha = "La fecha no puede ser anterior a hoy";
-      } else if (selectedDate.getTime() === today.getTime() && now >= cutoff) {
-        newErrors.fecha =
-          "Después de la 1:00 p.m., solo puedes reservar para mañana";
+      if (selectedDate < minDate) {
+      newErrors.fecha = "Después de la 1:00 p.m., solo puedes reservar para mañana o fechas posteriores.";
       }
     }
 
@@ -257,7 +254,7 @@ const Reservasform = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700 transition duration-300 ease-in-out"
+          className="bg-primario-verde text-white px-4 py-2 rounded mt-2 hover:bg-letras-amarillas hover:text-black transition duration-300 ease-in-out"
         >
           Reservar
         </button>
