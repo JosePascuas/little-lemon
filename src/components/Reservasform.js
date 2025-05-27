@@ -73,8 +73,10 @@ const Reservasform = () => {
       newErrors.fecha = "La fecha es obligatoria";
     } else {
       const now = new Date();
-      const selectedDate = new Date(formData.fecha);
-      selectedDate.setHours(0, 0, 0, 0);
+      const parseLocalDate = (dateString) => {
+      const [year, month, day] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day);
+      };
 
       const minDate = new Date();
       if (now.getHours() >= 13) {
