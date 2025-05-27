@@ -111,7 +111,9 @@ const Reservasform = () => {
       return;
     }
 
+    if (formData.fecha.includes("T")) {
     formData.fecha = formData.fecha.split("T")[0];
+}
 
     try {
       const response = await fetch("https://little-lemon-backend-production.up.railway.app/reservas", {
