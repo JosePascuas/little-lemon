@@ -80,7 +80,7 @@ const Reservasform = () => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(0, 0, 0, 0);
 
-    if (selectedDate.getTime() < tomorrow.getTime()) {
+    if (selectedDate() < tomorrow()) {
       newErrors.fecha = "Solo puedes reservar para mañana o fechas posteriores.";
     }
   }
