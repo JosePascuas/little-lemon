@@ -3,17 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const Reservasform = () => {
-  const getMinDate = () => {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const year = tomorrow.getFullYear();
-  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
-  const day = String(tomorrow.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-};
-
 
   const inputstyle =
     "p-3 text-center text-[22px] h-[38px] w-[260px] bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
@@ -65,24 +54,21 @@ const Reservasform = () => {
     }
 
     // Validación para fecha
-    if (!formData.fecha) {
-      newErrors.fecha = "La fecha es obligatoria";
-    } else {
-      const parseLocalDate = (dateString) => {
-      const [year, month, day] = dateString.split('-').map(Number);
-      return new Date(year, month - 1, day);
-    };
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
 
-    const selectedDate = parseLocalDate(formData.fecha);
-    selectedDate.setHours(0, 0, 0, 0);
+    const fechaSeleccionada = new Date(formData.fecha);
+    fechaSeleccionada.setHours(0, 0, 0, 0);
 
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+    if (!formData.fecha || isNaN(fechaSeleccionada)) {
+    newErrors.fecha = "Por favor ingresa una fecha válida.";
+  } else if (fechaSeleccionada < hoy) {
+    newErrors.fecha = "La fecha no puede ser anterior al día de hoy ni el día de hoy, Selecciona una fecha válida.";
+  }
 
-    if (selectedDate.getTime() < tomorrow.getTime()) {
-      newErrors.fecha = "Solo puedes reservar para mañana o fechas posteriores.";
-    }
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
   }
 
     // Validación hora sencilla
@@ -200,7 +186,6 @@ const Reservasform = () => {
           type="date"
           id="fecha"
           value={formData.fecha}
-          min={getMinDate()}
           onChange={handleChange}
         />
         {errors.fecha && <p className={errores}>{errors.fecha}</p>}
