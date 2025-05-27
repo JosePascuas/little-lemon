@@ -34,7 +34,6 @@ const Reservasform = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [succesMessage, setSuccesMessage] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -81,13 +80,14 @@ const Reservasform = () => {
       const selectedDate = parseLocalDate(formData.fecha);
       selectedDate.setHours(0, 0, 0, 0);
 
+
       const minDate = new Date();
       if (now.getHours() >= 13) {
         minDate.setDate(minDate.getDate() + 1);
       }
       minDate.setHours(0, 0, 0, 0);
 
-      if (selectedDate < minDate) {
+      if (selectedDate.getTime() < minDate.getTime()) {
       newErrors.fecha = "Después de la 1:00 p.m., solo puedes reservar para mañana o fechas posteriores.";
       }
     }
