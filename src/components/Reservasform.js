@@ -76,17 +76,12 @@ const Reservasform = () => {
 
       const fechaSeleccionada = crearFechaSinHora(formData.fecha);
 
-      if (isNaN(fechaSeleccionada)) {
+      if (!(fechaSeleccionada.getTime())) {
         newErrors.fecha = "Por favor ingresa una fecha válida.";
-      } else if (fechaSeleccionada < hoy) {
-        newErrors.fecha = "La fecha no puede ser anterior al día de hoy. Selecciona una fecha válida.";
+      } else if (fechaSeleccionada <= hoy) {
+        newErrors.fecha = "La fecha no puede ser anterior al día de hoy ni puede ser el día de hoy. Selecciona una fecha válida.";
       }
     }
-
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
 
     // Validación hora sencilla
     if (!formData.hora) {
