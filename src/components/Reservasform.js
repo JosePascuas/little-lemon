@@ -29,6 +29,12 @@ const Reservasform = () => {
     });
   };
 
+  const crearFechaSinHora = (fechaStr) => {
+    const fechaSolo = fechaStr.split("T")[0]; // por si viene con tiempo o zona
+    const partes = fechaSolo.split("-");
+    return new Date(partes[0], partes[1] - 1, partes[2]); // mes 0-based
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,17 +60,20 @@ const Reservasform = () => {
     }
 
     // Validación para fecha
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0);
+    if (!formData.fecha) {
+      newErrors.fecha = "Por favor ingresa una fecha válida.";
+    } else {
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
 
-    const fechaSeleccionada = new Date(formData.fecha);
-    fechaSeleccionada.setHours(0, 0, 0, 0);
+      const fechaSeleccionada = crearFechaSinHora(formData.fecha);
 
-    if (!formData.fecha || isNaN(fechaSeleccionada)) {
-    newErrors.fecha = "Por favor ingresa una fecha válida.";
-  } else if (fechaSeleccionada < hoy) {
-    newErrors.fecha = "La fecha no puede ser anterior al día de hoy ni el día de hoy, Selecciona una fecha válida.";
-  }
+      if (isNaN(fechaSeleccionada)) {
+        newErrors.fecha = "Por favor ingresa una fecha válida.";
+      } else if (fechaSeleccionada < hoy) {
+        newErrors.fecha = "La fecha no puede ser anterior al día de hoy. Selecciona una fecha válida.";
+      }
+    }
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
