@@ -111,12 +111,11 @@ const Reservasform = () => {
       return;
     }
 
-    const cleanData = {
-      ...formData,
-      fecha: formData.fecha.includes("T")
+    const fechaLimpia = formData.fecha.includes("T")
       ? formData.fecha.split("T")[0]
-      : formData.fecha,
-    };
+      : formData.fecha;
+
+    console.log("Datos enviados al backend:", formData)
 
     try {
       const response = await fetch("https://little-lemon-backend-production.up.railway.app/reservas", {
@@ -124,7 +123,7 @@ const Reservasform = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cleanData),
+        body: JSON.stringify({ ...formData, fecha: fechaLimpia }),
       });
 
       if (!response.ok) {
