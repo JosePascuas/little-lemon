@@ -128,7 +128,7 @@ const Reservasform = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...formData, fecha: fechaLimpia }),
+        body: JSON.stringify({ ...formData, fecha: finalDateToSend }),
       });
 
       if (!response.ok) {
