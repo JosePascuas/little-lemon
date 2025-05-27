@@ -78,6 +78,9 @@ const Reservasform = () => {
       return new Date(year, month - 1, day);
       };
 
+      const selectedDate = parseLocalDate(formData.fecha);
+      selectedDate.setHours(0, 0, 0, 0);
+
       const minDate = new Date();
       if (now.getHours() >= 13) {
         minDate.setDate(minDate.getDate() + 1);
