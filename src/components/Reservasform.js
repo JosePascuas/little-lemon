@@ -4,19 +4,16 @@ import { useState } from "react";
 
 const Reservasform = () => {
   const getMinDate = () => {
-    const now = new Date();
-    const minDate = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
-    if (now.getHours() >= 13) {
-      minDate.setDate(minDate.getDate() + 1);
-    }
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
+  const day = String(tomorrow.getDate()).padStart(2, "0");
 
-    const year = minDate.getFullYear();
-    const month = String(minDate.getMonth() + 1).padStart(2, "0");
-    const day = String(minDate.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
 
-    return `${year}-${month}-${day}`;
-  };
 
   const inputstyle =
     "p-3 text-center text-[22px] h-[38px] w-[260px] bg-tarjetas-fondo rounded-xl outline-transparent shadow-lg";
