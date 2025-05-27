@@ -2,6 +2,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
+const getMinDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const Reservasform = () => {
 
   const inputstyle =
@@ -13,7 +21,7 @@ const Reservasform = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     numero: "",
-    fecha: "",
+    fecha: getMinDate(),
     hora: "",
     personas: 1,
     ocasion: "",
@@ -30,9 +38,9 @@ const Reservasform = () => {
   };
 
   const crearFechaSinHora = (fechaStr) => {
-    const fechaSolo = fechaStr.split("T")[0]; // por si viene con tiempo o zona
+    const fechaSolo = fechaStr.split("T")[0];
     const partes = fechaSolo.split("-");
-    return new Date(partes[0], partes[1] - 1, partes[2]); // mes 0-based
+    return new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
   };
 
   const handleSubmit = async (e) => {
@@ -106,9 +114,11 @@ const Reservasform = () => {
       return;
     }
 
-    const fechaLimpia = formData.fecha.includes("T")
-      ? formData.fecha.split("T")[0]
-      : formData.fecha;
+    const selectedDateString = formData.fecha;
+    const localDate = new Date(selectedDateString + 'T00:00:00');
+    const finalDateToSend = localDate.toISOString();
+    console.log("Fecha enviada al backend (UTC ISO):", finalDateToSend);
+    console.log("Datos completos enviados al backend:", { ...formData, fecha: finalDateToSend });
 
     console.log("Datos enviados al backend:", formData)
 
@@ -196,6 +206,7 @@ const Reservasform = () => {
           id="fecha"
           value={formData.fecha}
           onChange={handleChange}
+          min={getMinDate()}
         />
         {errors.fecha && <p className={errores}>{errors.fecha}</p>}
 
