@@ -71,26 +71,22 @@ const Reservasform = () => {
     if (!formData.fecha) {
       newErrors.fecha = "La fecha es obligatoria";
     } else {
-      const now = new Date();
       const parseLocalDate = (dateString) => {
       const [year, month, day] = dateString.split('-').map(Number);
       return new Date(year, month - 1, day);
-      };
+    };
 
-      const selectedDate = parseLocalDate(formData.fecha);
-      selectedDate.setHours(0, 0, 0, 0);
+    const selectedDate = parseLocalDate(formData.fecha);
+    selectedDate.setHours(0, 0, 0, 0);
 
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
 
-      const minDate = new Date();
-      if (now.getHours() >= 13) {
-        minDate.setDate(minDate.getDate() + 1);
-      }
-      minDate.setHours(0, 0, 0, 0);
-
-      if (selectedDate.getTime() < minDate.getTime()) {
-      newErrors.fecha = "Después de la 1:00 p.m., solo puedes reservar para mañana o fechas posteriores.";
-      }
+    if (selectedDate.getTime() < tomorrow.getTime()) {
+      newErrors.fecha = "Solo puedes reservar para mañana o fechas posteriores.";
     }
+  }
 
     // Validación hora sencilla
     if (!formData.hora) {
