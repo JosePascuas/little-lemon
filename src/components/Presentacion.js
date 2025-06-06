@@ -6,7 +6,7 @@ const Presentacion = () =>{
     <section className='flex justify-center w-full bg-primario-verde'>
       <section className='flex flex-col w-[880px]  md:items-start md:flex-row'>
         <section className='flex flex-col justify-start items-center text-center md:text-left md:items-start md:flex-col w-full mt-5 md:mt-10 h-[350px]'>
-          <h1 className='text-letras-amarillas text-6xl font-markazi font-medium'>Litte Lemon</h1>
+          <h1 className='text-letras-amarillas text-6xl font-markazi font-medium'>Little Lemon</h1>
           <h2 className='text-letras-claras text-[40px] font-markazi font-normal'>Neiva</h2>
           <p className='text-letras-claras text-base w-[280px] font-karla font-extrabold mt-5'>
           Somos un restaurante mediterráneo familiar, centrado en recetas tradicionales servidas con un toque moderno.
